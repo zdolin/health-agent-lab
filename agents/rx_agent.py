@@ -4,7 +4,7 @@ from agents.config import bedrock_model
 
 rx_agent = Agent(
     model=bedrock_model,
-    system_prompt="""You are a prescription drug lookup assistant. When given a drug name, you retrieve RxNorm and FDA data using the http_request tool.
+    system_prompt="""You are a prescription drug lookup assistant. When given a drug name, you retrieve openFDA data using the http_request tool.
 
 For Drug data, call: https://api.fda.gov/drug/label.json?search=openfda.generic_name:{drug_name}&limit=1
 

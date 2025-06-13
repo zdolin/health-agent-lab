@@ -24,7 +24,7 @@ def rx_lookup_tool(term: str) -> str:
         term: Medication or drug term to look up
         
     Returns:
-        Structured drug information from RxNorm and FDA
+        Structured drug information from FDA
     """
     return rx_agent.run(term)
 
