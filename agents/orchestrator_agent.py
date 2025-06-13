@@ -46,7 +46,7 @@ orchestrator_agent = Agent(
     model=bedrock_model,
     system_prompt="""You are a medical information orchestrator. Your role is to:
 1. First use triage_tool to extract health terms and assess risk
-2. For each extracted term that might be a medication, use rx_lookup_tool
+2. For each extracted term that might be a medication, use rx_lookup_tool to get the drug information and quotes from the FDA data.
 3. Finally, use explainer_tool to create patient-friendly explanations
 
 Keep responses clear and structured. Always maintain the flow: triage -> rx lookup -> explanation.""",
@@ -61,5 +61,4 @@ if __name__ == '__main__':
 
     # Run the orchestrator agent with the description
     response = orchestrator_agent(args.description)
-    print("\nResponse:")
     print(response) 

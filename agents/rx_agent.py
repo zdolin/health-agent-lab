@@ -13,8 +13,9 @@ Be direct and include source data AND API CALLS MADE using quotation formatting:
 - Brand Name: "Advil"
 - Purpose: "Pain relief"
 - Warnings: "Do not exceed recommended dose"
-- API Call: https://api.fda.gov/drug/label.json?search=openfda.generic_name:{drug_name}&limit=1
 
-Only return fields that are found. Format the response in a structured way that's suitable for front-end display with highlighting or bolding.""",
+Also highlight verbiage from the FDA data in a standalone section.
+
+Only return fields that are found, along with the FDA verbiage section. Format the response in a structured way that's suitable for front-end display with highlighting or bolding.""",
     tools=[http_request]
 ) 
