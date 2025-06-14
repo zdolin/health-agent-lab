@@ -5,11 +5,11 @@ from agents.orchestrator_agent import orchestrator_agent
 
 app = FastAPI()
 
-class PatientDescription(BaseModel):
+class PatientRequest(BaseModel):
     description: str
 
-@app.post("/stream")
-async def stream_response(request: PatientDescription):
+@app.post("/triage")
+async def stream_response(request: PatientRequest):
     async def generate():
         try:
             async for event in orchestrator_agent.stream_async(request.description):
