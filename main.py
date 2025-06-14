@@ -1,12 +1,24 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from agents.orchestrator_agent import orchestrator_agent
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 class PatientRequest(BaseModel):
     description: str
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://zackdolin.com"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+@app.get("/")
+def root():
+    return {"status": "ok"}
 
 @app.post("/triage")
 async def stream_response(request: PatientRequest):
