@@ -22,6 +22,10 @@ app.add_middleware(
 def root():
     return {"status": "ok"}
 
+@app.get("/favicon.ico")
+def favicon():
+    return {}
+
 @app.post("/triage")
 async def stream_response(request: PatientRequest):
     async def generate():
