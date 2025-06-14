@@ -13,7 +13,7 @@ def triage_tool(patient_text: str) -> str:
     Returns:
         Triage results including extracted terms and risk assessment
     """
-    return triage_agent.run(patient_text)
+    return triage_agent(patient_text)
 
 @tool
 def rx_lookup_tool(term: str) -> str:
@@ -26,7 +26,7 @@ def rx_lookup_tool(term: str) -> str:
     Returns:
         Structured drug information from FDA
     """
-    return rx_agent.run(term)
+    return rx_agent(term)
 
 @tool
 def explainer_tool(data: dict) -> str:
@@ -39,7 +39,7 @@ def explainer_tool(data: dict) -> str:
     Returns:
         Patient-friendly explanation of the information
     """
-    return explainer_agent.run(data)
+    return explainer_agent(data)
 
 # Create the orchestrator agent with specialized tools
 orchestrator_agent = Agent(

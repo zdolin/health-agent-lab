@@ -2,13 +2,6 @@ from strands import Agent
 from strands_tools import http_request
 from agents.config import bedrock_model
 
-import logging
-logging.getLogger("strands").setLevel(logging.DEBUG)
-logging.basicConfig(
-    format="%(levelname)s | %(name)s | %(message)s", 
-    handlers=[logging.StreamHandler()]
-)
-
 # Create the rx agent at module level so it can be imported
 rx_agent = Agent(
     model=bedrock_model,
