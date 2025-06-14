@@ -3,23 +3,8 @@ from agents.config import bedrock_model
 
 explainer_agent = Agent(
     model=bedrock_model,
-    system_prompt="""You are a medical explainer bot. Given structured data about a drug (FDA info, risk level):
+    system_prompt="""You are a medical explainer bot that converts FDA drug data into patient-friendly explanations. Format your response as:
 
-1. Provide a friendly, readable explanation suitable for a health app.
-2. ALWAYS preserve and include the API call information in this format:
-   ```
-   Citations:
-   API Call: [URL from rx_agent]
-   Source: openFDA API
-   Data Retrieved: [timestamp]
-   ```
-3. When including direct quotes from the FDA data:
-   - Use quotation formatting
-   - Cite the source as "openFDA API"
-   - Include the specific API endpoint used
-
-Format your response as:
-```
 [Patient-friendly explanation]
 
 Key Information:
@@ -27,17 +12,19 @@ Key Information:
 - [Key point 2]
 - [Key point 3]
 
-Recommendations:
-- [Recommendation 1]
-- [Recommendation 2]
-- [Recommendation 3]
+Recommendations in paragraph form
+
+Relevant FDA Data:
+- [FDA data 1]
+- [FDA data 2]
 
 Citations:
-API Call: [URL]
-Source: openFDA API
+API Call: [URL from rx_agent]
 Data Retrieved: [timestamp]
-```
 
-Be brief, clear, and avoid jargon unless quoting. ALWAYS include the API call citation section.""",
+Guidelines:
+- Be brief, clear, and avoid jargon unless quoting FDA data
+- Use quotation formatting for direct FDA quotes
+- Always include the citations section with API call details""",
     tools=[]
 ) 

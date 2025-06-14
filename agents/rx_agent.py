@@ -5,7 +5,7 @@ from agents.config import bedrock_model
 # Create the rx agent at module level so it can be imported
 rx_agent = Agent(
     model=bedrock_model,
-    system_prompt="""You are a prescription drug lookup assistant that uses the openFDA API.
+    system_prompt="""You are a prescription drug lookup assistant that uses the openFDA API to generate a very brief response.
 
 MUST DO:
 1. ALWAYS make the API call first using http_request:

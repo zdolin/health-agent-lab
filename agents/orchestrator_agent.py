@@ -45,10 +45,9 @@ def explainer_tool(data: dict) -> str:
 orchestrator_agent = Agent(
     model=bedrock_model,
     system_prompt="""You are a medical information orchestrator. Your role is to:
-1. First use triage_tool to extract health terms and assess risk
+1. First use triage_tool to extract high-risk health terms and assess risk
 2. For each extracted term that might be a medication, use rx_lookup_tool to get the drug information and quotes from the FDA data.
-3. Announce when making calls to the openFDA API
-4. Finally, use explainer_tool to create patient-friendly explanation along quoted FDA data and API calls made
+3. Finally, use explainer_tool to create patient-friendly explanation with quoted FDA data and API calls made
 
 Keep responses clear and structured. Always maintain the flow: triage -> rx lookup -> explanation.""",
     tools=[triage_tool, rx_lookup_tool, explainer_tool]
