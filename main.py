@@ -3,6 +3,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from agents.orchestrator_agent import orchestrator_agent
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
 
 app = FastAPI()
 
@@ -11,20 +12,23 @@ class PatientRequest(BaseModel):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://health-agent-ui.vercel.app"],
-    allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["*"],
-    allow_credentials=True,
+    allow_origins=["http://localhost:3000", "https://health-agent-ui.vercel.app"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization", "Accept", "Origin", "X-Requested-With"],
     max_age=3600
 )
 
 @app.get("/")
 def root():
-    return {"status": "ok"}
+    return {"status": "ok", "message": f"Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"}
 
 @app.get("/favicon.ico")
 def favicon():
     return {}
+
+@app.options("/triage")
+async def options_triage():
+    return {"status": "ok"}
 
 @app.post("/triage")
 async def stream_response(request: PatientRequest):
