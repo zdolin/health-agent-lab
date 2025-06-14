@@ -11,7 +11,7 @@ class PatientRequest(BaseModel):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://zackdolin.com"],
+    allow_origins=["https://health-agent-ui.vercel.app"],
     allow_methods=["*"],
     allow_headers=["*"]
 )
