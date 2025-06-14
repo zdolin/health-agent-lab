@@ -12,8 +12,10 @@ class PatientRequest(BaseModel):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://health-agent-ui.vercel.app"],
-    allow_methods=["*"],
-    allow_headers=["*"]
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type", "Authorization"],
+    allow_credentials=True,
+    max_age=3600
 )
 
 @app.get("/")
