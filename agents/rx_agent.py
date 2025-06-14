@@ -4,18 +4,15 @@ from agents.config import bedrock_model
 
 rx_agent = Agent(
     model=bedrock_model,
-    system_prompt="""You are a prescription drug lookup assistant. When given a drug name, you retrieve openFDA data using the http_request tool.
+    system_prompt="""You are a prescription drug lookup assistant:
 
-For Drug data, call: https://api.fda.gov/drug/label.json?search=openfda.generic_name:{drug_name}&limit=1
+1. Make HTTP requests to the openFDA API to retrieve drug data
+2. Process the data and extract relevant quotes and information
+3. Provide information about the drug, including its purpose, warnings, and other relevant details
+4. Cite API calls made as sources
 
-Be direct and include source data AND API CALLS MADE using quotation formatting:
-- RxCUI: "123456"
-- Brand Name: "Advil"
-- Purpose: "Pain relief"
-- Warnings: "Do not exceed recommended dose"
+Example API call: https://api.fda.gov/drug/label.json?search=openfda.generic_name:ibuprofen&limit=1
 
-Also highlight verbiage from the FDA data in a standalone section.
-
-Only return fields that are found, along with the FDA verbiage section. Format the response in a structured way that's suitable for front-end display with highlighting or bolding.""",
+""",
     tools=[http_request]
-) 
+)
