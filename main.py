@@ -3,7 +3,6 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from agents.orchestrator_agent import orchestrator_agent
 from fastapi.middleware.cors import CORSMiddleware
-import json
 
 app = FastAPI()
 
