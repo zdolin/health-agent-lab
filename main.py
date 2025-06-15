@@ -36,8 +36,18 @@ async def stream_response(request: PatientRequest):
         try:
             async for event in orchestrator_agent.stream_async(request.description):
                 if "data" in event:
-                    # Only stream text chunks to the client
+                    # Stream text chunks to the client
                     yield event["data"]
+                elif "current_tool_use" in event:
+                    tool_info = event["current_tool_use"]
+                    if tool_info["name"] == "triage_tool":
+                        yield f"\n🔍 Using triage tool to analyze symptoms...\n"
+                    elif tool_info["name"] == "rx_lookup_tool":
+                        yield f"\n💊 Looking up medication information...\n"
+                elif "reasoning" in event and event.get("reasoningText"):
+                    yield f"\n📝 {event['reasoningText']}\n"
+                elif "force_stop" in event:
+                    yield f"\n⚠️ {event.get('force_stop_reason', 'Process stopped')}\n"
         except Exception as e:
             yield f"Error: {str(e)}"
 
