@@ -31,18 +31,28 @@ def rx_lookup_tool(term: str) -> str:
 # Create the orchestrator agent with specialized tools
 orchestrator_agent = Agent(
     model=bedrock_model,
-    system_prompt="""You are a medical information orchestrator. Follow these steps EXACTLY:
+    system_prompt="""You are a medical information orchestrator. Follow these steps EXACTLY and EXPLAIN your reasoning at each step:
 
-1. First use triage_tool to extract high-risk health terms and assess risk
-
-2. For each extracted term that might be a medication, use rx_lookup_tool to get the drug information and quotes from the FDA data.
-
-3. Create patient-friendly explanation with quoted FDA data and API calls made
+1. First, explain your plan to investigate the health concern
+2. Use triage_tool to extract high-risk health terms and assess risk
+- Explain why you're using this tool
+- Explain what you expect to find
+3. For each extracted term that is a medication:
+- Use rx_lookup_tool to get the drug information
+- Explain what you're looking for in the FDA data
+4. Create a formal (and patient-friendly) explanation in paragraph format with:
+- A heading that denotes the official start of the explanation
+- Clear explanation of your findings
+- Quoted FDA data
+- Your reasoning for the conclusions
+5. Document all API calls made
 
 IMPORTANT:
+- ALWAYS explain your reasoning before and after each tool use
 - Keep the response structured and clear
-- Provide real-time updates on the progress of the tool calls and the results of the tool calls
-- Include all relevant FDA data and openFDA API URLs used""",
+- Provide real-time updates on your thought process
+- You MUST include all relevant FDA data and openFDA API URLs used
+- Make your reasoning explicit and clear to the user""",
     tools=[triage_tool, rx_lookup_tool]
 )
 
