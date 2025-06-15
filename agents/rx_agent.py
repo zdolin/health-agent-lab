@@ -12,8 +12,7 @@ MUST DO:
 {
 "method": "GET",
 "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:advil&limit=1",
-"headers": {"Accept": "application/json"},
-"metrics": true
+"headers": {"Accept": "application/json"}
 }
 
 2. Keep response very brief and structured:
@@ -26,34 +25,8 @@ Drug Information for [Drug Name]:
 
 Citations:
 API Call: [URL used]
-Source: openFDA API
-Data Retrieved: [timestamp]
 ```
 
 """,
     tools=[http_request]
 )
-
-def rx_handler(query: str) -> str:
-    """
-    Handle drug information queries using the rx agent.
-    
-    Args:
-        query: The drug query (e.g., "what does the fda say about paxil")
-        
-    Returns:
-        Drug information with FDA data and citations
-    """
-    response = rx_agent(query)
-    return str(response)
-
-if __name__ == '__main__':
-    import argparse
-    parser = argparse.ArgumentParser(description='Run the rx agent with a drug query.')
-    parser.add_argument('query', type=str, help='Drug query (e.g., "what does the fda say about paxil")')
-    args = parser.parse_args()
-
-    # Run the rx agent with the query
-    response = rx_handler(args.query)
-    print("\nResponse:")
-    print(response)

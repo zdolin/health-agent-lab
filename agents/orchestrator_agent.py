@@ -29,12 +29,12 @@ def rx_lookup_tool(term: str) -> str:
     return rx_agent(term)
 
 @tool
-def explainer_tool(data: dict) -> str:
+def explainer_tool(data: str) -> str:
     """
     Generate patient-friendly explanations using the explainer agent.
     
     Args:
-        data: Dictionary containing term, risk assessment, and rx data
+        data: String containing the information to explain
         
     Returns:
         Patient-friendly explanation of the information
@@ -44,12 +44,17 @@ def explainer_tool(data: dict) -> str:
 # Create the orchestrator agent with specialized tools
 orchestrator_agent = Agent(
     model=bedrock_model,
-    system_prompt="""You are a medical information orchestrator. Your role is to:
-1. First use triage_tool to extract high-risk health terms and assess risk
+    system_prompt="""You are a medical information orchestrator. Follow these steps EXACTLY:
+
+1. First use triage_tool to extract high-risk health terms and assess risk'
+
 2. For each extracted term that might be a medication, use rx_lookup_tool to get the drug information and quotes from the FDA data.
+
 3. Finally, use explainer_tool to create patient-friendly explanation with quoted FDA data and API calls made
 
-Keep responses clear and structured. Always maintain the flow: triage -> rx lookup -> explanation.""",
+IMPORTANT:
+- Keep the response structured and clear
+- Include all relevant FDA data and citations""",
     tools=[triage_tool, rx_lookup_tool, explainer_tool]
 )
 

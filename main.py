@@ -20,7 +20,7 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"status": "ok", "message": f"Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"}
+    return {"status": "ok", "message": f"Last updated: 2025-06-14 21:38:00"}
 
 @app.get("/favicon.ico")
 def favicon():
@@ -43,7 +43,12 @@ async def stream_response(request: PatientRequest):
 
     return StreamingResponse(
         generate(),
-        media_type="text/plain"
+        media_type="text/plain",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no"  # Disable proxy buffering
+        }
     )
 
 if __name__ == "__main__":
