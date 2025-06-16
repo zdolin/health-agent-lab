@@ -4,8 +4,7 @@ A prototype for a multi-agent system for clinical reasoning and healthcare decis
 
 ⚠️ **DISCLAIMER**: This is a learning project only. This system is not intended to provide medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals for medical decisions.
 
-## Live Demo
-View the demo at: [https://health-agent-ui.vercel.app/](https://health-agent-ui.vercel.app/)
+## [Try the Demo →](https://health-agent-ui.vercel.app/)
 
 ## Technology Stack
 
@@ -24,8 +23,15 @@ Each agent is designed to handle specific aspects of clinical reasoning, working
 
 The system consists of three main agent types:
 1. **Triage Agent**: Specializes in symptom analysis and risk assessment
+   - Uses `extract_health_terms` tool to identify medical conditions and symptoms
+   - Uses `assess_risk` tool to evaluate severity and urgency
+   
 2. **RX Agent**: Handles medication information retrieval from openFDA
+   - Uses `http_request` tool to query the openFDA API
+   - Processes and structures drug information from FDA data
+   
 3. **Orchestrator Agent**: Manages the workflow and coordinates between agents
+   - Combines and structures the final response
 
 ## Prerequisites
 
