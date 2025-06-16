@@ -4,7 +4,7 @@ A prototype for a multi-agent system for clinical reasoning and healthcare decis
 
 ⚠️ **DISCLAIMER**: This is a learning project only. This system is not intended to provide medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals for medical decisions.
 
-## Try the demo [https://health-agent-ui.vercel.app/](https://health-agent-ui.vercel.app/)
+### Try the demo [https://health-agent-ui.vercel.app/](https://health-agent-ui.vercel.app/)
 
 ## Technology Stack
 
