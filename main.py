@@ -68,11 +68,30 @@ async def stream_response(request: PatientRequest):
                                             if isinstance(content_list, list) and len(content_list) > 0:
                                                 text_content = content_list[0].get('text', '').strip()
                                                 if text_content:
-                                                    yield f"\n💬 {text_content}\n"
+                                                    # Format extracted terms if present
+                                                    if "Extracted Terms:" in text_content:
+                                                        # Replace the list format with a more readable format
+                                                        text_content = text_content.replace('["', '').replace('"]', '')
+                                                        text_content = text_content.replace('", "', ', ')
+                                                    # Replace newlines with <br> for HTML display
+                                                    formatted_text = text_content.replace('\n', '<br>')
+                                                    yield f"\n💬 {formatted_text}\n"
                             else:
-                                yield f"\n💬 {content}\n"
+                                # Handle regular content line by line
+                                text_content = str(content).strip()
+                                if text_content:
+                                    lines = text_content.split('\n')
+                                    for line in lines:
+                                        if line.strip():
+                                            yield f"\n💬 {line}\n"
                     else:
-                        yield f"\n💬 {message_content}\n"
+                        # Handle non-dict message content line by line
+                        text_content = str(message_content).strip()
+                        if text_content:
+                            lines = text_content.split('\n')
+                            for line in lines:
+                                if line.strip():
+                                    yield f"\n💬 {line}\n"
                 elif "force_stop" in event:
                     yield f"\n⚠️ {event.get('force_stop_reason', 'Process stopped')}\n"
         except Exception as e:
