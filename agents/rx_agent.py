@@ -15,7 +15,7 @@ MUST DO:
 "headers": {"Accept": "application/json"}
 }
 
-2. Keep response very brief and structured:
+2. Keep response very brief and structured. Only include data that is directly from the API call:
 ```
 Drug Information for [Drug Name]:
 - Purpose: [purpose]

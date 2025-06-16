@@ -33,16 +33,23 @@ async def options_triage():
 async def stream_response(request: PatientRequest):
     async def generate():
         try:
+            last_tool_message = None  # Track the last tool message
             async for event in orchestrator_agent.stream_async(request.description):
                 if "data" in event:
                     # Stream text chunks to the client
                     yield event["data"]
                 elif "current_tool_use" in event:
                     tool_info = event["current_tool_use"]
+                    current_message = None
                     if tool_info["name"] == "triage_tool":
-                        yield f"\n🔍 Using triage tool to analyze symptoms...\n"
+                        current_message = f"\n🔍 Using triage tool to analyze symptoms...\n"
                     elif tool_info["name"] == "rx_lookup_tool":
-                        yield f"\n💊 Looking up medication information...\n"
+                        current_message = f"\n💊 Looking up medication information...\n"
+                    
+                    # Only yield if the message is different from the last one
+                    if current_message and current_message != last_tool_message:
+                        yield current_message
+                        last_tool_message = current_message
                 elif "reasoning" in event and event.get("reasoningText"):
                     yield f"\n📝 {event['reasoningText']}\n"
                 elif "message" in event:
@@ -50,7 +57,8 @@ async def stream_response(request: PatientRequest):
                     if isinstance(message_content, dict):
                         content = message_content.get("content", "No content")
                         role = message_content.get("role", "unknown")
-                        yield f"\n💬 New {role} message: {content}\n"
+                        if role == "user":
+                            yield f"\n💬 New {role} message: {content}\n"
                     else:
                         yield f"\n💬 New message: {message_content}\n"
                 elif "force_stop" in event:

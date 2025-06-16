@@ -19,7 +19,20 @@ def assess_risk(symptoms: List[str]) -> str:
         'loss of consciousness',
         'severe head injury',
         'stroke symptoms',
-        'seizure'
+        'seizure',
+        'severe allergic reaction',
+        'high fever',
+        'severe pain',
+        'sudden confusion',
+        'severe dehydration',
+        'poisoning',
+        'severe abdominal pain',
+        'severe vomiting',
+        'severe diarrhea',
+        'severe burns',
+        'severe trauma',
+        'severe neck pain',
+        'severe back pain'
     }
     
     # Check if any high-risk symptoms are present
