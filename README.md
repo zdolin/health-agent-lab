@@ -2,6 +2,11 @@
 
 A prototype for a multi-agent system for clinical reasoning and healthcare decision support, built with AI and web technologies. Integrates with FDA data for evidence-based medication information.
 
+⚠️ **DISCLAIMER**: This is a learning project only. This system is not intended to provide medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals for medical decisions.
+
+## Live Demo
+View the demo at: [https://health-agent-ui.vercel.app/](https://health-agent-ui.vercel.app/)
+
 ## Technology Stack
 
 - **Strands**: Multi-agent orchestration framework for complex clinical reasoning tasks
@@ -36,19 +41,24 @@ git clone https://github.com/zdolin/health-agent-lab.git
 cd health-agent-lab
 ```
 
-2. Install dependencies:
+2. Set up and activate virtual environment:
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Unix/macOS
+# or
+.venv\Scripts\activate  # On Windows
+```
+
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Configure AWS credentials:
-```bash
-export AWS_ACCESS_KEY_ID=your_access_key
-export AWS_SECRET_ACCESS_KEY=your_secret_key
-export AWS_REGION=your_region
-```
+4. Configure AWS access:
+   - Ensure you have AWS CLI installed and configured with appropriate credentials
+   - You'll need access to the Claude 3.5 Haiku model in AWS Bedrock (us.anthropic.claude-3-5-haiku-20241022-v1:0)
 
-4. Start the server:
+5. Start the server:
 ```bash
 python main.py
 ```
@@ -59,13 +69,6 @@ The API will be available at http://localhost:8000
 
 The main entry point for clinical reasoning is:
 - `/triage` - Initiates the multi-agent clinical reasoning process
-
-## Environment Variables
-
-Required environment variables:
-- `AWS_ACCESS_KEY_ID`: Your AWS access key
-- `AWS_SECRET_ACCESS_KEY`: Your AWS secret key
-- `AWS_REGION`: AWS region for Bedrock access
 
 ## License
 
