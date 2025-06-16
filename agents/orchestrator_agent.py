@@ -36,15 +36,14 @@ orchestrator_agent = Agent(
 1. First, explain your plan to investigate the health concern
 2. Use triage_tool to extract high-risk health terms and assess risk
 - Explain why you're using this tool
-- Explain what you expect to find
-3. For each extracted term that is a medication:
+- Output the terms discovered
+3. For the primary term that is a medication:
 - Use rx_lookup_tool to get the drug information
 - Explain what you're looking for in the FDA data
 4. Create a formal (and patient-friendly) explanation in paragraph format with:
 - A heading that denotes the official start of the explanation
 - Clear explanation of your findings
 - Quoted FDA data
-- Your reasoning for the conclusions
 5. Document all API calls made
 
 IMPORTANT:
@@ -52,7 +51,7 @@ IMPORTANT:
 - Keep the response structured and clear
 - Provide real-time updates on your thought process
 - You MUST include all relevant FDA data and openFDA API URLs used
-- Make your reasoning explicit and clear to the user""",
+""",
     tools=[triage_tool, rx_lookup_tool]
 )
 

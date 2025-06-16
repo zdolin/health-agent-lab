@@ -45,6 +45,14 @@ async def stream_response(request: PatientRequest):
                         yield f"\n💊 Looking up medication information...\n"
                 elif "reasoning" in event and event.get("reasoningText"):
                     yield f"\n📝 {event['reasoningText']}\n"
+                elif "message" in event:
+                    message_content = event.get("message", {})
+                    if isinstance(message_content, dict):
+                        content = message_content.get("content", "No content")
+                        role = message_content.get("role", "unknown")
+                        yield f"\n💬 New {role} message: {content}\n"
+                    else:
+                        yield f"\n💬 New message: {message_content}\n"
                 elif "force_stop" in event:
                     yield f"\n⚠️ {event.get('force_stop_reason', 'Process stopped')}\n"
         except Exception as e:
