@@ -58,9 +58,21 @@ async def stream_response(request: PatientRequest):
                         content = message_content.get("content", "No content")
                         role = message_content.get("role", "unknown")
                         if role == "user":
-                            yield f"\n💬 New {role} message: {content}\n"
+                            # Handle tool results
+                            if isinstance(content, list) and len(content) > 0:
+                                for item in content:
+                                    if isinstance(item, dict) and 'toolResult' in item:
+                                        tool_result = item['toolResult']
+                                        if tool_result.get('status') == 'success':
+                                            content_list = tool_result.get('content', [])
+                                            if isinstance(content_list, list) and len(content_list) > 0:
+                                                text_content = content_list[0].get('text', '').strip()
+                                                if text_content:
+                                                    yield f"\n💬 {text_content}\n"
+                            else:
+                                yield f"\n💬 {content}\n"
                     else:
-                        yield f"\n💬 New message: {message_content}\n"
+                        yield f"\n💬 {message_content}\n"
                 elif "force_stop" in event:
                     yield f"\n⚠️ {event.get('force_stop_reason', 'Process stopped')}\n"
         except Exception as e:

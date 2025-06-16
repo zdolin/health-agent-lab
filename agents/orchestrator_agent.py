@@ -44,7 +44,8 @@ orchestrator_agent = Agent(
 - A heading that denotes the official start of the explanation
 - Clear explanation of your findings
 - Quoted FDA data
-5. Document all API calls made
+5. Document all openFDA API calls made by the rx_lookup_tool
+- openFDA API Call: [URL used]
 
 IMPORTANT:
 - ALWAYS explain your reasoning before and after each tool use
