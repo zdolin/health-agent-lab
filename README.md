@@ -4,7 +4,8 @@ A multi-agent orchestration prototype using Strands, FastAPI, and AWS Bedrock to
 
 ⚠️ **DISCLAIMER**: This is a learning project only. This system is not intended to provide medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals for medical decisions.
 
-### View a demo here [https://health-agent-ui.vercel.app/](https://health-agent-ui.vercel.app/)
+### View a demo here: [https://health-agent-ui.vercel.app/](https://health-agent-ui.vercel.app/)
+
 
 ## Technology Stack
 
