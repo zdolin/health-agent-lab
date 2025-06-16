@@ -19,7 +19,7 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"status": "ok", "message": f"Last updated: 2025-06-14 21:38:00"}
+    return {"status": "ok"}
 
 @app.get("/favicon.ico")
 def favicon():
