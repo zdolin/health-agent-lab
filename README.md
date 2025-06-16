@@ -1,10 +1,10 @@
 # Health Agent Lab
 
-A prototype for a multi-agent system for clinical reasoning and healthcare decision support, built with AI and web technologies. Integrates with FDA data for evidence-based medication information.
+A multi-agent orchestration prototype using Strands, FastAPI, and AWS Bedrock to simulate clinical reasoning tasks with modular, callable tools. Integrates with the [openFDA API](https://open.fda.gov/) for evidence-based medication information.
 
 ⚠️ **DISCLAIMER**: This is a learning project only. This system is not intended to provide medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals for medical decisions.
 
-### Try the demo [https://health-agent-ui.vercel.app/](https://health-agent-ui.vercel.app/)
+### View a demo here [https://health-agent-ui.vercel.app/](https://health-agent-ui.vercel.app/)
 
 ## Technology Stack
 
