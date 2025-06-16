@@ -63,7 +63,7 @@ pip install -r requirements.txt
 
 4. Configure AWS access:
    - Ensure you have AWS CLI installed and configured with appropriate credentials
-   - You'll need access to the Claude 3.5 Haiku model in AWS Bedrock (us.anthropic.claude-3-5-haiku-20241022-v1:0)
+   - You'll need access to the Claude 3.5 Haiku model in AWS Bedrock (us.anthropic.claude-3-5-haiku-20241022-v1:0 - or you can change the model)
 
 5. Start the server:
 ```bash
