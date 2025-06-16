@@ -44,7 +44,9 @@ async def stream_response(request: PatientRequest):
                     if tool_info["name"] == "triage_tool":
                         current_message = f"\n🔍 Using triage tool to analyze symptoms...\n"
                     elif tool_info["name"] == "rx_lookup_tool":
-                        current_message = f"\n💊 Looking up medication information...\n"
+                        current_message = f"\n💊 Looking up medication information, this may take a minute...\n"
+                    elif tool_info["name"] == "assess_risk":
+                        current_message = f"\n⚠️ Assessing potential health risks...\n"
                     
                     # Only yield if the message is different from the last one
                     if current_message and current_message != last_tool_message:
@@ -68,11 +70,9 @@ async def stream_response(request: PatientRequest):
                                             if isinstance(content_list, list) and len(content_list) > 0:
                                                 text_content = content_list[0].get('text', '').strip()
                                                 if text_content:
-                                                    # Format extracted terms if present
-                                                    if "Extracted Terms:" in text_content:
-                                                        # Replace the list format with a more readable format
-                                                        text_content = text_content.replace('["', '').replace('"]', '')
-                                                        text_content = text_content.replace('", "', ', ')
+                                                    # Replace the list format with a more readable format
+                                                    text_content = text_content.replace('["', '').replace('"]', '')
+                                                    text_content = text_content.replace('", "', ', ')
                                                     # Replace newlines with <br> for HTML display
                                                     formatted_text = text_content.replace('\n', '<br>')
                                                     yield f"\n💬 {formatted_text}\n"
