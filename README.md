@@ -1,6 +1,8 @@
 # Health Agent Lab
 
-A modular AI multi-agent orchestration prototype using [Strands Agents](https://strandsagents.com/latest/), FastAPI, and AWS Bedrock to simulate clinical reasoning tasks with modular, callable tools. Integrates with the [openFDA API](https://open.fda.gov/) for evidence-based medication information.
+A modular AI multi-agent orchestration prototype using [Strands Agents](https://strandsagents.com/latest/), FastAPI, and AWS Bedrock to simulate clinical reasoning tasks with modular, callable tools. 
+
+Integrates with the [openFDA API](https://open.fda.gov/) for evidence-based medication information.
 
 ⚠️ **DISCLAIMER**: This is a learning project only. This system is not intended to provide medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals for medical decisions.
 
