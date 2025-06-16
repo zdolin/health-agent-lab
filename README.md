@@ -1,44 +1,72 @@
-# health-agent-lab
-A model-driven agent orchestration prototype using Strands, FastAPI, and Next.js to simulate clinical reasoning tasks with modular, callable tools.
+# Health Agent Lab
 
-## Docker Setup
+A prototype for a multi-agent system for clinical reasoning and healthcare decision support, built with AI and web technologies. Integrates with FDA data for evidence-based medication information.
 
-### Building the Container
+## Technology Stack
+
+- **Strands**: Multi-agent orchestration framework for complex clinical reasoning tasks
+- **FastAPI**: High-performance backend API framework
+- **AWS Bedrock**: Foundation model access for advanced AI capabilities
+- **AWS ECS**: Currently deployed manually via AWS CLI to ECS Fargate
+
+## Features
+
+This system provides automated clinical reasoning through a multi-agent architecture that processes patient symptoms, assesses risk levels, and retrieves medication information from the [openFDA API](https://open.fda.gov/). The agents work together to provide structured, evidence-based responses while maintaining clear documentation of all data sources and reasoning steps.
+
+## Architecture
+
+Each agent is designed to handle specific aspects of clinical reasoning, working in concert through the Strands orchestration framework.
+
+The system consists of three main agent types:
+1. **Triage Agent**: Specializes in symptom analysis and risk assessment
+2. **RX Agent**: Handles medication information retrieval from openFDA
+3. **Orchestrator Agent**: Manages the workflow and coordinates between agents
+
+## Prerequisites
+
+- Python 3.8+
+- AWS Account with Bedrock access
+- AWS CLI configured with appropriate credentials
+
+## Setup
+
+1. Clone the repository:
 ```bash
-# Login to ECR
-aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.<your-region>.amazonaws.com
-
-# Build the image
-docker build -t health-agent-lab .
-
-# Tag the image
-docker tag health-agent-lab:latest <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/health-agent-lab:latest
-
-# Push to ECR
-docker push <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/health-agent-lab:latest
+git clone https://github.com/zdolin/health-agent-lab.git
+cd health-agent-lab
 ```
 
-### Running Locally
+2. Install dependencies:
 ```bash
-docker run -p 8000:8000 health-agent-lab
+pip install -r requirements.txt
 ```
 
-### Environment Variables
-The application requires the following environment variables:
-- AWS credentials for Bedrock access
-- Any other API keys or configuration needed by the agents
+3. Configure AWS credentials:
+```bash
+export AWS_ACCESS_KEY_ID=your_access_key
+export AWS_SECRET_ACCESS_KEY=your_secret_key
+export AWS_REGION=your_region
+```
 
-You can provide these through:
-1. A `.env` file mounted as a volume
-2. Environment variables passed to the container
-3. AWS ECS task definition environment variables
+4. Start the server:
+```bash
+python main.py
+```
 
-### ECS Fargate Deployment
-To deploy to ECS Fargate:
-1. Build and push the Docker image to Amazon ECR
-2. Create an ECS cluster
-3. Create a task definition with the container image
-4. Create a service using the task definition
-5. Configure the necessary environment variables in the task definition
+The API will be available at http://localhost:8000
 
-The application will be available on port 8000.
+## API Endpoints
+
+The main entry point for clinical reasoning is:
+- `/triage` - Initiates the multi-agent clinical reasoning process
+
+## Environment Variables
+
+Required environment variables:
+- `AWS_ACCESS_KEY_ID`: Your AWS access key
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret key
+- `AWS_REGION`: AWS region for Bedrock access
+
+## License
+
+MIT License
