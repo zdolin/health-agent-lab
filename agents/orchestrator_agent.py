@@ -48,6 +48,7 @@ orchestrator_agent = Agent(
 - openFDA API Call: [URL used]
 
 IMPORTANT:
+- Do NOT ask follow up questions.
 - ALWAYS explain your reasoning before and after each tool use
 - Keep the response structured and clear
 - Provide real-time updates on your thought process
