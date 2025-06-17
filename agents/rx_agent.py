@@ -19,7 +19,6 @@ MUST DO:
 ```
 Drug Information for [Drug Name]:
 - Purpose: [purpose]
-- Usage: [usage]
 - Warnings: [warnings]
 - Side Effects: [side effects]
 

@@ -44,7 +44,7 @@ async def stream_response(request: PatientRequest):
                     if tool_info["name"] == "triage_tool":
                         current_message = f"\n🔍 Using triage tool to analyze symptoms...\n"
                     elif tool_info["name"] == "rx_lookup_tool":
-                        current_message = f"\n💊 Looking up medication information, this may take a minute...\n"
+                        current_message = f"\n💊 Gathering medication information, this may take a minute...\n"
                     elif tool_info["name"] == "assess_risk":
                         current_message = f"\n⚠️ Assessing potential health risks...\n"
                     
